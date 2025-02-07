@@ -33,7 +33,8 @@ int main()
 	switch (choice)
 	{
 	case 1:
-		//开始比赛
+		//开始比赛   比赛接口
+		sm.start();
 		break;
 	case 2:
 	//查看记录

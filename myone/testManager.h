@@ -16,7 +16,7 @@ public:
 	vector<int> v3;    //胜利前三个
 	//存编号 及选手的容器
 	map<int, player> m_player;    //自定义选手类  map容器类似哈希表
-	int m_index;
+	int m_index;   //记录第几轮比赛
 
 	//构造
 	speechmanager();
@@ -27,12 +27,18 @@ public:
 	//退出功能
 	void exittest();
 
-	//开始比赛
+	//开始初始化比赛
 	void initspeech();  //成员函数
 
 	//初始化创建选手
 	void createplayer();
 	
+	//开始比赛
+	void start();
+
+	//抽签
+	void draw();
+
 
 
 	//析构
