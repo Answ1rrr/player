@@ -39,6 +39,8 @@ public:
 	//抽签
 	void draw();
 
+	//比赛环节
+	void concest();
 
 
 	//析构

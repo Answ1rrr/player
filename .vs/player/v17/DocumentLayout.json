@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:myone\\testManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Raytine\\Desktop\\player\\myone\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:myone\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Raytine\\Desktop\\player\\myone\\testManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:myone\\testManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Raytine\\Desktop\\player\\myone\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:myone\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Raytine\\Desktop\\player\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "player.h",
+              "DocumentMoniker": "C:\\Users\\Raytine\\Desktop\\player\\myone\\player.h",
+              "RelativeDocumentMoniker": "myone\\player.h",
+              "ToolTip": "C:\\Users\\Raytine\\Desktop\\player\\myone\\player.h",
+              "RelativeToolTip": "myone\\player.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-02-09T13:59:17.472Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -36,20 +49,20 @@
               "RelativeDocumentMoniker": "myone\\testManager.cpp",
               "ToolTip": "C:\\Users\\Raytine\\Desktop\\player\\myone\\testManager.cpp",
               "RelativeToolTip": "myone\\testManager.cpp",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAUwHcAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAgwKIAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-07T12:40:52.321Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "testManager.h",
               "DocumentMoniker": "C:\\Users\\Raytine\\Desktop\\player\\myone\\testManager.h",
               "RelativeDocumentMoniker": "myone\\testManager.h",
               "ToolTip": "C:\\Users\\Raytine\\Desktop\\player\\myone\\testManager.h",
               "RelativeToolTip": "myone\\testManager.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACoAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-02-07T12:39:58.063Z",
               "EditorCaption": ""
@@ -57,25 +70,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "README.md",
-              "DocumentMoniker": "C:\\Users\\Raytine\\Desktop\\player\\README.md",
-              "RelativeDocumentMoniker": "README.md",
-              "ToolTip": "C:\\Users\\Raytine\\Desktop\\player\\README.md",
-              "RelativeToolTip": "README.md",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-02-07T12:38:42.002Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "test.cpp",
               "DocumentMoniker": "C:\\Users\\Raytine\\Desktop\\player\\myone\\test.cpp",
               "RelativeDocumentMoniker": "myone\\test.cpp",
               "ToolTip": "C:\\Users\\Raytine\\Desktop\\player\\myone\\test.cpp",
               "RelativeToolTip": "myone\\test.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACMAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACQAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-07T12:24:56.038Z",
               "EditorCaption": ""

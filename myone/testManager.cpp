@@ -85,16 +85,15 @@ void speechmanager::start()
 	//抽签   实现
 	draw();
 	//比赛 赋分
-	
+	concest();
 	//显示晋级的结果
-	
+
 	m_index++;
 	//第二轮
 	//抽签
 	draw();
-
 	//比赛
-	
+	concest();
 
 	//显示最终结果
 	//保存分数
@@ -135,3 +134,33 @@ void speechmanager::draw()
 
 
 //比赛及赋分
+void speechmanager::concest()
+{
+	cout << "------------- 第" << this->m_Index << "轮正式比赛开始：------------- " << endl;
+	//容器保存分数 和选手编号
+	//map<int, int> m2;   
+	multimap<double, int, greater<int>> mp;    //// 以及greater<int>的作用   大于号  作为排序的参考    降序排列       不使用的话默认升序排列
+	//这个和map的区别    允许多个相同的键，可以有重复的键（map不能有重复的key）。  插入相同的键会在容器中保留所有的值。 （map插入已经存在的键，新的值会覆盖旧的） 
+	 
+	int num=0;//分组
+
+	vector<int> vc;    //cur容器
+	if (this->m_index==1)
+	{
+		vc = v1;   //第一轮接收v1容器   12人
+	}
+	else
+	{
+		vc = v2;   //6人
+	}
+
+	//遍历选手
+
+	//打分  每个选手给他一个接收评委分数的容器 deque     10个评委  之后去去除最高最低分 求平均分
+
+	//赋分 赋值给选手类 的分数属性  sm.player.score
+
+	//六人一组   信息带分数  放进mp容器中
+
+
+}
