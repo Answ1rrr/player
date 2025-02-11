@@ -52,9 +52,11 @@ public:
 	void loadrecord();
 	bool fileempty;   
 	map<int, vector<string>> record;                //往届记录
+	
+	void showrecord();
 
 	//清空记录 功能4
-
+	void clearrecord();
 	
 	//析构
 	~speechmanager();

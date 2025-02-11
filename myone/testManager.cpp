@@ -10,7 +10,10 @@ speechmanager::speechmanager()
 {
 	//初始化属性
 	this->initspeech();   //表明是当前对象的成员函数
+	//创建选手
 	this->createplayer();
+	//获取往届记录
+	this->loadrecord();
 }
 
 speechmanager::~speechmanager()
@@ -53,7 +56,9 @@ void speechmanager::initspeech()
 	this->v3.clear();
 	this->m_player.clear();  //容器
 	//初始化比赛轮数
-	this->m_index = 1;    
+	this->m_index = 1;
+	//初始化记录容器
+	this->record.clear();
 }
 //实现创建
 void speechmanager::createplayer()
@@ -101,6 +106,11 @@ void speechmanager::start()
 	showscore();
 	//保存分数
 	save();
+	//初始化属性
+	this->initspeech();
+	this->createplayer();
+	this->loadrecord();
+
 	cout << "比赛结束" << endl;
 	system("pause");
 	system("cls");
@@ -248,7 +258,7 @@ void speechmanager::showscore()
 }
 
 //保存记录到文件里  路径默认到了Debug中
-void speechmanager::save()
+void speechmanager::save()   //
 {
 	//涉及读写文件
 	ofstream ofs;
@@ -262,14 +272,14 @@ void speechmanager::save()
 	{		//
 		ofs << *it << "," << m_player[*it].score[1] << ",";
 	}
-	cout << endl;
+	ofs << endl;   //这里  要让文件换行  要不然会导致下面的问题  index永远只是1
 
 	//关闭
 	ofs.close();
 	cout << "记录已经保存" << endl;
 }
-
-void speechmanager::loadrecord()  //读取记录
+ 
+void speechmanager::loadrecord()  //读取记录     
 {
 	ifstream ifs("game.csv", ios::in);   
 	if (!ifs.is_open())   //判断是否打开   返回true或flase    // 使用 !ofs 检查流状态
@@ -304,10 +314,69 @@ void speechmanager::loadrecord()  //读取记录
 		while (true)
 		{
 			pos = data.find(",", start);  //从零开始查‘，’
-
+			if (pos == -1)
+			{
+				break;  //找不到 就break
+			}
+			string tmp = data.substr(start,pos-start);//字符串分割出来一段  (起始位置，长度)
+			v.push_back(tmp);
+			start = pos + 1;
 		}
+		this->record.insert(make_pair(index, v));  
+		index++;
 	}
+	//cout <<"index=" << index << endl;   //index=1   
+	ifs.close();
+	//cout << "记录保存好了" << endl;
+	this->fileempty = false;   //不为空
+}
+
+//显示往届分数
+void speechmanager::showrecord()
+{
+	//加提示
+	if (this->fileempty)
+	{
+		cout << "文件不存在或记录为空！" << endl;
+	}
+	else
+	{
+		//这里可能有问题   这里record.size()为1
+		//cout <<"size=" << this->record.size() << endl;   
+		for (auto it = record.begin(); it!=record.end();it++)  //record 一个map容器 存放往届数据 遍历容器
+		{
+			cout << "第" << (it->first)+1<< "届" <<
+				" 冠军选手编号：" << it->second[0] << " 分数:" << it->second[1] << " " <<
+				" 亚军选手编号：" << it->second[2] << " 分数:" << it->second[3] << " " <<
+				" 季军选手编号：" << it->second[4] << " 分数:" << it->second[5] << " " <<
+				endl;
+		}
+		system("pause");
+		system("cls");
+	}
+}
 
 
+//清空
+void speechmanager::clearrecord()
+{
+	cout << "确认清空？" << endl;
+	cout << "1、确认" << endl;
+	cout << "2、返回" << endl;
 
+	int select = 0;
+	cin >> select;
+	if (select==1)
+	{
+		//trunc 覆盖  如果存在 删除并重建
+		ofstream ofs("game.csv", ios::trunc);
+		ofs.close();
+		this->initspeech();
+		this->createplayer();
+		this->loadrecord();
+
+		cout << "清空成功" << endl;
+	}
+	system("pause");
+	system("cls");
 }

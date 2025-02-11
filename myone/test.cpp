@@ -2,12 +2,14 @@
 using namespace std;
 #include "testManager.h"  //baohan
 #include<string>
-
+#include <cstdlib> //包含rand 和 srand
+#include<ctime>  //time
 
 
 
 int main()
 {
+	srand((unsigned int)time(NULL));//随机种子
 	//实例类   管理对象
 	speechmanager sm;
 	
@@ -20,8 +22,6 @@ int main()
 
 	//测试菜单
 	
-
-
 	//提供分支选择 ，每个功能不同接口
 	int choice;   //定义选择
 	//这里为什么套一个while   为了重新显示菜单 不用重新启动程序  多次进行不同的操作
@@ -38,11 +38,11 @@ int main()
 		break;
 	case 2:
 	//查看记录
-
+		sm.showrecord();
 		break;
 	case 3:
 	//清空记录
-
+		sm.clearrecord();
 		break;
 	case 0:
 	//退出   提供接口
@@ -54,9 +54,6 @@ int main()
 	break;
 }
 	}
-
-
-	
 
 	system("pause");
 	return 0;
