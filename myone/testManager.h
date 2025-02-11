@@ -4,7 +4,7 @@ using namespace std;
 #include<vector>
 #include<map>
 #include"player.h"
-
+#include<deque>
 //管理类
 
 class speechmanager
@@ -42,7 +42,20 @@ public:
 	//比赛环节
 	void concest();
 
+	//显示比赛结果
+	void showscore();
 
+	//保存分数
+	void save();
+
+	//查看记录 功能3
+	void loadrecord();
+	bool fileempty;   
+	map<int, vector<string>> record;                //往届记录
+
+	//清空记录 功能4
+
+	
 	//析构
 	~speechmanager();
 

@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\myone"
+    "\\myone",
+    "\\myone\\Debug"
   ],
   "SelectedNode": "\\myone\\testManager.cpp",
   "PreviewInSolutionExplorer": false

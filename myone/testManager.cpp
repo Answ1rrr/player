@@ -1,7 +1,10 @@
 #include "testManager.h"
 #include "player.h"
 #include <random>
+#include<numeric> // accumulate
+#include<fstream>
 //补全  构造和析构
+
 
 speechmanager::speechmanager()
 {
@@ -48,7 +51,7 @@ void speechmanager::initspeech()
 	this->v1.clear();
 	this->v2.clear();
 	this->v3.clear();
-	this->m_player.clear();
+	this->m_player.clear();  //容器
 	//初始化比赛轮数
 	this->m_index = 1;    
 }
@@ -56,7 +59,7 @@ void speechmanager::initspeech()
 void speechmanager::createplayer()
 {
 	string nameseed = "ABCDEFGHIJKL";  //12个
-	for (int i = 0; i<nameseed.size(); i++)
+	for (int i = 0; i < nameseed.size(); i++)
 	{
 		string name = "选手";   //局部变量name
 		name += nameseed[i];   //实现 选手A 选手B
@@ -87,17 +90,20 @@ void speechmanager::start()
 	//比赛 赋分
 	concest();
 	//显示晋级的结果
-
-	m_index++;
+	showscore();
+	this->m_index++;   //可以不用this
 	//第二轮
 	//抽签
 	draw();
 	//比赛
 	concest();
-
 	//显示最终结果
+	showscore();
 	//保存分数
-
+	save();
+	cout << "比赛结束" << endl;
+	system("pause");
+	system("cls");
 
 }
 
@@ -136,7 +142,7 @@ void speechmanager::draw()
 //比赛及赋分
 void speechmanager::concest()
 {
-	cout << "------------- 第" << this->m_Index << "轮正式比赛开始：------------- " << endl;
+	cout << "------------- 第" << this->m_index << "轮正式比赛开始：------------- " << endl;
 	//容器保存分数 和选手编号
 	//map<int, int> m2;   
 	multimap<double, int, greater<int>> mp;    //// 以及greater<int>的作用   大于号  作为排序的参考    降序排列       不使用的话默认升序排列
@@ -155,12 +161,153 @@ void speechmanager::concest()
 	}
 
 	//遍历选手
+	for (auto it = vc.begin(); it != vc.end(); it++)
+	{
+		num++;//这一步含义是什么
 
-	//打分  每个选手给他一个接收评委分数的容器 deque     10个评委  之后去去除最高最低分 求平均分
+		//打分  每个选手给他一个接收评委分数的容器 deque（双端数组，可以对头端进行插入删除操作）     
+		deque<double> d;
+		for (int i = 0; i < 10; i++)  //生成十次  600-1000
+		{
+			double score = (rand()%401+600)/10.f;//随机赋分   /10.f 什么含义  除以10 并且保证float型
+			d.push_back(score); //
+		}
 
-	//赋分 赋值给选手类 的分数属性  sm.player.score
+		//10个评委  之后去去除最高最低分 求平均分
+		sort(d.begin(), d.end(),greater<double>()); //降序排列
+		d.pop_back();
+		d.pop_front();   //删除前后
+		double sum = accumulate(d.begin(),d.end(),0.0f) ;    //求和   0.0f 在这里  第三位代表累加的初始值
+		double avg = sum /(double)d.size();
+		//每个人的平均分
+		this->m_player[*it].score[this->m_index-1] = avg;   //这里*it 是vc容器中 即编号
+		//m_player 是一个map容器 存放 player类，以及 编号 <int,player>
+		// 
+		//六人一组   信息带分数  放进mp容器中
+		mp.insert(make_pair(avg, *it));//平均分和编号
+		if (num % 6 == 0)  //6个人了 一组
+		{
+			cout << "第" << num / 6 << "组的名次如下" << endl;
+			for (multimap<double, int, greater<int>> ::iterator it = mp.begin(); it != mp.end(); it++)
+			{
+				cout <<"编号：" << it->second <<" 姓名：" <<this->m_player[it->second].name << "分数"
+					<<this->m_player[it->second].score[this->m_index-1] << endl;
+			}
+			//取前三名
+			int count = 0;
+			for (auto it = mp.begin(); it != mp.end() && count < 3; it++, count++)
+			{
+				if (this->m_index == 1)
+				{
+					v2.push_back((*it).second);  //这里*it.second  指的是编号  把前三的编号放进v2中 两轮 v2装6个编号
+				}
+				else
+				{
+					v3.push_back((*it).second);  //也就是最终组
+				}
 
-	//六人一组   信息带分数  放进mp容器中
+			}
+
+			mp.clear();
+			cout << endl;
+
+		}
+
+	}
+	cout << "------------- 第" << this->m_index << "轮比赛完毕  ------------- " << endl;
+	system("pause");
+
+
+}
+
+//显示结果
+void speechmanager::showscore()
+{
+	cout << "---------第" << this->m_index << "轮晋级选手信息如下：-----------" << endl;
+	vector<int> v;
+	if (this->m_index==1)
+	{
+		v = v2;
+	}
+	else
+	{
+		v = v3;
+	}
+
+	for (auto it = v.begin(); it != v.end();it++) //遍历获胜选手编号信息  
+	{
+		cout << "第" << this->m_index << "轮" << "选手编号：" << *it <<" 姓名：" << this->m_player[*it].name    //前面带编号
+			<<this->m_player[*it].score[this->m_index-1]<< endl;    //为什么这里可以省略this指针
+	}
+	cout << endl;
+	system("pause");
+	system("cls");
+	//继续操作就返回菜单
+	this->show_menu();
+
+}
+
+//保存记录到文件里  路径默认到了Debug中
+void speechmanager::save()
+{
+	//涉及读写文件
+	ofstream ofs;
+	ofs.open("game.csv", ios::out | ios::app); // 不停地写入 追加模式
+
+	//覆盖上一次结果的写法   使用trunc标志
+	//ofs.open("game.csv", ios::out | ios::trunc);
+	
+	//将数据写进去  只写获胜
+	for (auto it = this->v3.begin(); it != v3.end(); it++)
+	{		//
+		ofs << *it << "," << m_player[*it].score[1] << ",";
+	}
+	cout << endl;
+
+	//关闭
+	ofs.close();
+	cout << "记录已经保存" << endl;
+}
+
+void speechmanager::loadrecord()  //读取记录
+{
+	ifstream ifs("game.csv", ios::in);   
+	if (!ifs.is_open())   //判断是否打开   返回true或flase    // 使用 !ofs 检查流状态
+	{
+		this->fileempty = true;
+		cout << "文件不存在" << endl;
+		ifs.close();
+		return;
+	}
+
+	char ch;
+	ifs >> ch;  //什么意思？？？
+	if (ifs.eof())   //判断是否读到文件末尾
+	{
+		cout << "文件为空" << endl;
+		this->fileempty = true;
+		ifs.close();
+		return;
+	}
+
+	//文件不为空
+	this->fileempty = false;
+	ifs.putback(ch);  //读取的单个字符放回去
+
+	string data;
+	int index = 0;
+	while (ifs >> data)
+	{
+		vector<string> v;
+		int pos = -1;
+		int start = 0;
+		while (true)
+		{
+			pos = data.find(",", start);  //从零开始查‘，’
+
+		}
+	}
+
 
 
 }
